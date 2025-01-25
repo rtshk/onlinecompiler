@@ -1,17 +1,18 @@
 //Importing necessary modules 
 const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config();
 const cors = require("cors");
 const geminiRoutes = require("./routes/geminiRoutes");
 const compilerRoutes = require("./routes/compileRoutes")
 
 //Setting up express app
 const app = express();
-dotenv.config({});
 const PORT = process.env.PORT;
+
 //Middlewares setup
 app.use(cors({
-    origin : 'http://localhost:5173',
+    origin : 'http://localhost:5174',
     credentials : true,
 }))
 app.use(express.json());

@@ -92,6 +92,11 @@ const ChatGPT = () => {
             className="flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none px-4"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handlePromptSubmit();
+              }
+            }}
           />
           <button
             className="bg-gray-700 text-white px-4 py-2 rounded-2xl"
