@@ -3,8 +3,9 @@ import Nav from "./Nav";
 import { useDispatch, useSelector } from "react-redux";
 import { setHistory } from "../redux/mainSlice";
 import Message from "./Message";
+import { IoSend } from "react-icons/io5";
 
-const ChatGPT = () => {
+const Gemini = () => {
   const dispatch = useDispatch();
   const [prompt, setPrompt] = useState("");
   const context = useSelector((state) => state.main.history);
@@ -22,12 +23,12 @@ const ChatGPT = () => {
   const handlePromptSubmit = async () => {
     try {
       setPrompt("");
-  
+
       // Add user's input to the chat context immediately
       dispatch(
         setHistory([...context, { role: "user", parts: [{ text: prompt }] }])
       );
-  
+
       // Make the POST request using Fetch
       const response = await fetch(`http://localhost:8000/api/gemini/prompt`, {
         method: "POST",
@@ -36,24 +37,24 @@ const ChatGPT = () => {
         },
         body: JSON.stringify({ context, prompt, code }),
       });
-  
+
       if (!response.body) {
         throw new Error("ReadableStream not supported in response.");
       }
-  
+
       // Process the streamed response
       const reader = response.body.getReader();
       const decoder = new TextDecoder("utf-8");
-  
+
       let modelReply = "";
-  
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        console.log(value)
+        console.log(value);
         const chunk = decoder.decode(value);
         modelReply += chunk;
-  
+
         // Update the chat context incrementally
         dispatch(
           setHistory([
@@ -63,14 +64,12 @@ const ChatGPT = () => {
           ])
         );
       }
-  
+
       console.log("Full response received:", modelReply);
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
-  
-  
 
   return (
     <div className="w-full h-full rounded-md flex flex-col justify-between text-white">
@@ -85,7 +84,7 @@ const ChatGPT = () => {
         <div ref={messagesEndRef}></div>
       </div>
       <div className="p-2">
-        <div className="flex items-center bg-[#2b2b2b] rounded-2xl p-1 w-full">
+        <div className="flex items-center bg-[#2b2b2b] rounded-full p-1 w-full h-[50px]">
           <input
             type="text"
             placeholder="Message Gemini"
@@ -98,16 +97,13 @@ const ChatGPT = () => {
               }
             }}
           />
-          <button
-            className="bg-gray-700 text-white px-4 py-2 rounded-2xl"
-            onClick={handlePromptSubmit}
-          >
-            Submit
-          </button>
+          <div className=" h-[100%] hover:bg-[#696969] flex items-center justify-center p-3 rounded-full">
+            <IoSend onClick={handlePromptSubmit}>Submit</IoSend>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ChatGPT;
+export default Gemini;
