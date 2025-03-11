@@ -7,6 +7,7 @@ export const mainSlice = createSlice({
     notes : "",
     complexity : {},
     history : [],
+    output : ""
   },
   reducers: {
     setCode : (state, action) => {
@@ -20,6 +21,9 @@ export const mainSlice = createSlice({
     },
     setHistory : (state, action) => {
       state.history = action.payload;
+    },
+    setOutput : (state, action) => {
+      state.output = action.payload;
     }
   }
 })
