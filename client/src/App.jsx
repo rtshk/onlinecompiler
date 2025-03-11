@@ -5,6 +5,8 @@ import Notes from "./Components/Notes";
 import Gemini from "./Components/Gemini";
 import InputOutput from "./Components/InputOutput";
 import Complexity from "./Components/Complexity";
+import Signup from "./Components/Signup";
+import Login from "./Components/Login";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/" element = {<InputOutput/>}/>
           <Route path="/complexity" element = {<Complexity/>}/>
         </Route>
+
       </Routes>
     </>
   );

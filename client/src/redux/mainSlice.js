@@ -28,5 +28,5 @@ export const mainSlice = createSlice({
   }
 })
 
-export const { setCode, setNotes, setComplexity, setHistory } = mainSlice.actions
+export const { setCode, setNotes, setComplexity, setHistory, setOutput } = mainSlice.actions
 export default mainSlice.reducer
