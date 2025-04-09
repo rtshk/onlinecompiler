@@ -12,7 +12,7 @@ const PORT = process.env.PORT;
 
 //Middlewares setup
 app.use(cors({
-    origin : '',
+    origin : 'https://onlinecompilerfrontend.onrender.com',
     credentials : true,
 }))
 app.use(express.json());
