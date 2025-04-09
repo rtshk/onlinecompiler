@@ -1,7 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router"; // Use react-router-dom for routing
-import { setComplexity, setNotes } from "../redux/mainSlice";
+import {
+  setComplexity,
+  setComplexityLoading,
+  setNotes,
+  setNotesLoading,
+} from "../redux/mainSlice";
 import axios from "axios";
 
 const Nav = () => {
@@ -10,6 +15,8 @@ const Nav = () => {
 
   const handleNotes = async () => {
     try {
+      dispatch(setNotesLoading(true));
+
       console.log("notes fetching");
       const result = await axios.post(
         `http://localhost:8000/api/gemini/notes`,
@@ -20,11 +27,14 @@ const Nav = () => {
       console.log(notes);
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch(setNotesLoading(false));
     }
   };
   const handleComplexity = async () => {
     try {
       console.log("complexity fetching");
+      dispatch(setComplexityLoading(true));
       const response = await axios.post(
         `http://localhost:8000/api/gemini/complexity`,
         main
@@ -35,6 +45,8 @@ const Nav = () => {
       dispatch(setComplexity(parsedObject.complexity));
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch(setComplexityLoading(false));
     }
   };
   return (

@@ -18,7 +18,7 @@ const Navbar = () => {
             <UserButton/>
           </SignedIn>
         </ul>
-      </div>
+      </div>  
     </nav>
   );
 };

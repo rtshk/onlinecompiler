@@ -4,29 +4,52 @@ export const mainSlice = createSlice({
   name: 'main',
   initialState: {
     code: "",
-    notes : "",
-    complexity : {},
-    history : [],
-    output : ""
+    input: "",            // ✅ NEW: To hold user input
+    output: "",
+    notes: "",
+    complexity: {},
+    history: [],
+    complexityLoading: false,
+    notesLoading: false,
   },
   reducers: {
-    setCode : (state, action) => {
-        state.code = action.payload;
+    setCode: (state, action) => {
+      state.code = action.payload;
     },
-    setNotes : (state, action) => {
-        state.notes = action.payload;
+    setInput: (state, action) => {
+      state.input = action.payload;
     },
-    setComplexity : (state, action) => {
+    setOutput: (state, action) => {
+      state.output = action.payload;
+    },
+    setNotes: (state, action) => {
+      state.notes = action.payload;
+    },
+    setComplexity: (state, action) => {
       state.complexity = action.payload;
     },
-    setHistory : (state, action) => {
+    setHistory: (state, action) => {
       state.history = action.payload;
     },
-    setOutput : (state, action) => {
-      state.output = action.payload;
+    setComplexityLoading: (state, action) => {
+      state.complexityLoading = action.payload;
+    },
+    setNotesLoading: (state, action) => {
+      state.notesLoading = action.payload;
     }
   }
 })
 
-export const { setCode, setNotes, setComplexity, setHistory, setOutput } = mainSlice.actions
-export default mainSlice.reducer
+// ✅ Export the new action along with existing ones
+export const {
+  setCode,
+  setInput,             // ✅ NEW export
+  setOutput,
+  setNotes,
+  setComplexity,
+  setHistory,
+  setComplexityLoading,
+  setNotesLoading
+} = mainSlice.actions;
+
+export default mainSlice.reducer;

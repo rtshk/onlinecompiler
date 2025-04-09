@@ -1,16 +1,15 @@
 #include <iostream>
-using namespace std;
 
 int main() {
-    int n;
-    cout << "Enter a number: ";
-    cin >> n;
+    int num1, num2, sum;
+    std::cin >> num1;
+    std::cin >> num2;
 
-    int factorial = 1;
-    for (int i = 1; i <= n; i++) {
-        factorial *= i;
-    }
-
-    cout << "The factorial of " << n << " is: " << factorial << endl;
+    // Calculating sum
+    sum = num1 + num2;
+   
+    // Printing the result
+    std::cout << "Sum = " << sum << std::endl;
     return 0;
-}
+    }
+  

@@ -1,0 +1,51 @@
+.language-selector {
+    position: relative;
+    display: inline-block;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .language-selector-button {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .language-selector-button:hover {
+    background-color: #2d2d2d;
+  }
+  
+  .language-dropdown {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 6px;
+    min-width: 140px;
+    z-index: 10;
+    padding: 4px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+  
+  .language-dropdown-item {
+    padding: 8px 12px;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .language-dropdown-item:hover {
+    background-color: #2a2a2a;
+    color: #1DB954; /* Green highlight on hover */
+  }
+  
+  .language-dropdown-item.active {
+    color: #1DB954;
+    font-weight: 500;
+  }
+  

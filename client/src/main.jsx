@@ -13,7 +13,6 @@ if (!PUBLISHABLE_KEY) {
 }
 createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-
   <ClerkLoaded>
   <Provider store={store}>
     <BrowserRouter>
@@ -21,5 +20,5 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </Provider>
   </ClerkLoaded>
-  </ClerkProvider>
+  </ClerkProvider>  
 );
