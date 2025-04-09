@@ -29,7 +29,7 @@ const Gemini = () => {
         setHistory([...context, { role: "user", parts: [{ text: prompt }] }])
       );
 
-      const response = await fetch(`https://onlinecompilerbackend.onrender.com/api/gemini/prompt`, {
+      const response = await fetch(`${VITE_BACKENDURL}/api/gemini/prompt`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
