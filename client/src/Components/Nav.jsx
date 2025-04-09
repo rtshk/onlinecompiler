@@ -19,7 +19,7 @@ const Nav = () => {
 
       console.log("notes fetching");
       const result = await axios.post(
-        `${VITE_BACKENDURL}/api/gemini/notes`,
+        `https://onlinecompilerbackend.onrender.com/api/gemini/notes`,
         main
       );
       const notes = result.data.notes.replace(/```html|```/g, "").trim();
@@ -36,7 +36,7 @@ const Nav = () => {
       console.log("complexity fetching");
       dispatch(setComplexityLoading(true));
       const response = await axios.post(
-        `${VITE_BACKENDURL}/api/gemini/complexity`,
+        `https://onlinecompilerbackend.onrender.com/api/gemini/complexity`,
         main
       );
       const complexityString = response?.data?.complexity;
