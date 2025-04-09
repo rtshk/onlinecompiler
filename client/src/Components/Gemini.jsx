@@ -21,15 +21,14 @@ const Gemini = () => {
   }, [context]);
 
   const handlePromptSubmit = async () => {
+    if (!prompt.trim()) return; // prevent empty submissions
     try {
       setPrompt("");
 
-      // Add user's input to the chat context immediately
       dispatch(
         setHistory([...context, { role: "user", parts: [{ text: prompt }] }])
       );
 
-      // Make the POST request using Fetch
       const response = await fetch(`http://localhost:8000/api/gemini/prompt`, {
         method: "POST",
         headers: {
@@ -42,25 +41,21 @@ const Gemini = () => {
         throw new Error("ReadableStream not supported in response.");
       }
 
-      // Process the streamed response
       const reader = response.body.getReader();
       const decoder = new TextDecoder("utf-8");
-
       let modelReply = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        console.log(value);
         const chunk = decoder.decode(value);
         modelReply += chunk;
 
-        // Update the chat context incrementally
         dispatch(
           setHistory([
             ...context,
             { role: "user", parts: [{ text: prompt }] },
-            { role: "model", parts: [{ text: modelReply }] }, // Append the response progressively
+            { role: "model", parts: [{ text: modelReply }] },
           ])
         );
       }
@@ -77,29 +72,34 @@ const Gemini = () => {
         <h1 className="text-2xl font-bold p-3 text-white">ChatBot</h1>
         <Nav />
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
+
+      {/* Chat messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-[#444]">
         {context.map((message, index) => (
           <Message key={index} message={message} />
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-      <div className="p-2">
-        <div className="flex items-center bg-[#2b2b2b] rounded-full p-1 w-full h-[50px]">
+
+      {/* Input Box */}
+      <div className="p-3">
+        <div className="flex items-center bg-[#2e2e2e] rounded-full px-4 py-2 shadow-md focus-within:ring-2 ring-[#1db954] transition-all">
           <input
             type="text"
-            placeholder="Message Gemini"
-            className="flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none px-4"
+            placeholder="Type your message..."
+            className="flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm md:text-base"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handlePromptSubmit();
-              }
+              if (e.key === "Enter") handlePromptSubmit();
             }}
           />
-          <div className=" h-[100%] hover:bg-[#696969] flex items-center justify-center p-3 rounded-full">
-            <IoSend onClick={handlePromptSubmit}>Submit</IoSend>
-          </div>
+          <button
+            onClick={handlePromptSubmit}
+            className="p-2 ml-2 text-lg bg-[#1db954] hover:bg-[#159943] rounded-full transition duration-200 flex items-center justify-center"
+          >
+            <IoSend className="text-white" />
+          </button>
         </div>
       </div>
     </div>

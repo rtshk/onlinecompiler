@@ -10,88 +10,20 @@ export const LANGUAGE_VERSIONS = {
   
   
   export const CODE_SNIPPETS = {
-    javascript: `
-  // Factorial using recursion
-  function factorial(n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
-  }
+    javascript: `function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\nconsole.log("Factorial of 5 is", factorial(5));\n// Factorial using recursion`,
   
-  console.log("Factorial of 5 is", factorial(5));
-  `,
+    typescript: `function square(num: number): number {\n  return num * num;\n}\nconsole.log("Square of 6 is", square(6));\n// Type-safe square function`,
   
-    typescript: `
-  // Type-safe square function
-  function square(num: number): number {
-    return num * num;
-  }
+    python: `for i in range(1, 11):\n  if i % 2 == 0:\n    print(i, end=" ")\n# Print even numbers in a range`,
   
-  console.log("Square of 6 is", square(6));
-  `,
+    java: `public class PrimeCheck {\n  public static void main(String[] args) {\n    int num = 7, count = 0;\n    for (int i = 1; i <= num; i++) {\n      if (num % i == 0) count++;\n    }\n    System.out.println(count == 2 ? "Prime" : "Not Prime");\n  }\n}\n// Check if a number is prime`,
   
-    python: `
-  # Print even numbers in a range
-  for i in range(1, 11):
-    if i % 2 == 0:
-      print(i, end=" ")
-  `,
+    csharp: `using System;\nclass Program {\n  static void Main() {\n    string input = "hello";\n    char[] arr = input.ToCharArray();\n    Array.Reverse(arr);\n    Console.WriteLine(new string(arr));\n  }\n}\n// Reverse a string`,
   
-    java: `
-  // Check if a number is prime
-  public class PrimeCheck {
-    public static void main(String[] args) {
-      int num = 7, count = 0;
-      for (int i = 1; i <= num; i++) {
-        if (num % i == 0) count++;
-      }
-      System.out.println(count == 2 ? "Prime" : "Not Prime");
-    }
-  }
-  `,
+    php: `<?php\n$arr = [1, 2, 3, 4];\necho "Sum = " . array_sum($arr);\n// Sum of an array`,
   
-    csharp: `
-  // Reverse a string
-  using System;
-  
-  class Program {
-    static void Main() {
-      string input = "hello";
-      char[] arr = input.ToCharArray();
-      Array.Reverse(arr);
-      Console.WriteLine(new string(arr));
-    }
-  }
-  `,
-  
-    php: `
-  <?php
-  // Sum of an array
-  $arr = [1, 2, 3, 4];
-  echo "Sum = " . array_sum($arr);
-  ?>
-  `,
-  
-    cpp: `
-  // Linear search in array
-  #include <iostream>
-  using namespace std;
-  
-  int main() {
-    int n, key;
-    cin >> n;
-    int arr[n];
-    for (int i = 0; i < n; i++) cin >> arr[i];
-    cin >> key;
-  
-    for (int i = 0; i < n; i++) {
-      if (arr[i] == key) {
-        cout << "Found at index " << i << endl;
-        return 0;
-      }
-    }
-    cout << "Not found" << endl;
-    return 0;
-  }
-  `,
+    cpp: `#include <iostream>\nusing namespace std;\nint main() {\n  int n, key;\n  cin >> n;\n  int arr[n];\n  for (int i = 0; i < n; i++) cin >> arr[i];\n  cin >> key;\n  for (int i = 0; i < n; i++) {\n    if (arr[i] == key) {\n      cout << "Found at index " << i << endl;\n      return 0;\n    }\n  }\n  cout << "Not found" << endl;\n  return 0;\n}\n// Linear search in array`
   };
+  
+  
   
