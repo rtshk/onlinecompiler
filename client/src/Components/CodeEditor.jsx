@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCode, setOutput } from "../redux/mainSlice";
@@ -11,10 +11,15 @@ const CodeEditor = () => {
   const editorRef = useRef(null);
   const main = useSelector((state) => state.main);
   const code = main.code;
-  const input = main.input; // ✅ input from Redux
+  const input = main.input;
 
   const [language, setLanguage] = useState("javascript");
   const [isLoading, setIsLoading] = useState(false);
+
+  // ✅ Load default JavaScript code once when component mounts
+  useEffect(() => {
+    dispatch(setCode(CODE_SNIPPETS["javascript"]));
+  }, [dispatch]);
 
   const handleCompile = async () => {
     const sourceCode = editorRef.current?.getValue();
@@ -22,7 +27,7 @@ const CodeEditor = () => {
 
     try {
       setIsLoading(true);
-      const result = await executeCode(language, sourceCode, input); // ✅ pass input
+      const result = await executeCode(language, sourceCode, input);
       dispatch(setOutput(result.run.output));
     } catch (error) {
       console.error("Error running code:", error);
